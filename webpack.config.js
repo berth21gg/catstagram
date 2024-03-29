@@ -29,7 +29,18 @@ module.exports = {
                 use: {
                     loader: 'svelte-loader'
                 }
-            }
+            },
+            {
+                test: /\.(png|gif|jpg|jpeg)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: { 
+                        name: 'assets/[hash].[ext]' 
+                      },
+                  }
+                ],
+              },
         ]
     },
 

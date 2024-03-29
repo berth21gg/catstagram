@@ -1,1 +1,1 @@
-# pugstagram
+# catstagram
