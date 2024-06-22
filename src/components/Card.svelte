@@ -1,6 +1,9 @@
 <script>
-    import mostacho from '../assets/cat01.jpg';
     import Comments from './Comments.svelte';
+    import Modal from './Modal.svelte';
+    import Share from './Share.svelte';
+
+    import { blur } from 'svelte/transition';
 
     export let username;
     export let location;
@@ -9,9 +12,24 @@
     export let comments;
     export let avatar;
 
+    let isModal = false;
+
+    function handleModal(){
+      isModal = !isModal;
+    }
+
 </script>
 
 <div class="Card">
+
+    {#if isModal}
+      <div transition:blur>
+        <Modal>
+          <Share on:click={handleModal} />
+        </Modal>
+      </div>
+    {/if}
+
     <div class="Card-container">
         <div class="Card-Header">
             <div class="Card-user">
@@ -33,7 +51,7 @@
         <div class="Card-icons">
             <div class="Card-icons-first">
                 <i class="fa-solid fa-heart"></i>
-                <i class="fa-solid fa-paper-plane"></i>
+                <i aria-hidden="true" class="fas fa-paper-plane" on:click={handleModal} />
             </div>
             <div class="Card-icons-seconds">
                 <i class="fa-solid fa-bookmark"></i>
