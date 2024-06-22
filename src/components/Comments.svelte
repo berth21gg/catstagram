@@ -1,11 +1,31 @@
+<script>
+  export let comments = [];
+
+  function addComment(event){
+    const msg = event.target.text.value;
+    if(msg.length > 1){
+      const message = {
+        id: Date.now(),
+        text: msg,
+        username: "berth_21"
+      }
+      comments = [...comments, message];
+      event.target.text.value = "";
+    }
+  }
+
+</script>
+
 <div class="Comments">
     <div class="Comments-content">
+      {#each comments as comment (comment.id)}
         <div class="Comments-users">
-            <h3>bizco</h3>
-            <span>Hola Mostacho</span>
+            <h3>{comment.username}</h3>
+            <span>{comment.text}</span>
         </div>
+      {/each}
         <div class="Comments-add">
-            <form>
+            <form on:submit|preventDefault={addComment}>
                 <input type="text" 
                     class="Comments-input"
                     placeholder="Agregar Comentario..."

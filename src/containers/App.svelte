@@ -1,15 +1,36 @@
 <script>
+    import {onMount} from 'svelte';
+    
     import Header from '../components/Header.svelte';
     import Main from '../components/Main.svelte';
     import Sidebar from '../components/Sidebar.svelte';
     import TimeLine from '../components/TimeLine.svelte';
+    import Example from '../components/Example.svelte';
+
+    let data = {};
+    const API = "https://kittygram-api.vercel.app/";
+
+    const fetchData = async () =>{
+        console.log("fetchData");
+        const response = await fetch(API);
+        data = await response.json();
+    }
+
+    onMount(fetchData);
+
+    // onMount(async () => {
+    //     console.log("onMount");
+    //     const response = await fetch(API);
+    //     data = await response.json();
+    // });
 
 </script>
 
 <Header />
 <Main>
-  <TimeLine />
-  <Sidebar />  
+  <TimeLine posts={data.posts} />
+  <Sidebar {...data.user}/>
+  <Example />  
 </Main>
 
 <style>
@@ -27,4 +48,5 @@
         margin: 0;
         padding: 0;;
     }
+    
 </style>
