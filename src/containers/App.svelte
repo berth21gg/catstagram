@@ -5,13 +5,11 @@
     import Main from '../components/Main.svelte';
     import Sidebar from '../components/Sidebar.svelte';
     import TimeLine from '../components/TimeLine.svelte';
-    import Example from '../components/Example.svelte';
 
     let data = {};
     const API = "https://kittygram-api.vercel.app/";
 
     const fetchData = async () =>{
-        console.log("fetchData");
         const response = await fetch(API);
         data = await response.json();
     }
@@ -30,7 +28,6 @@
 <Main>
   <TimeLine posts={data.posts} />
   <Sidebar {...data.user}/>
-  <Example />  
 </Main>
 
 <style>
